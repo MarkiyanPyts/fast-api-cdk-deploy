@@ -12,6 +12,10 @@ export class FastApiCdkDeployStack extends cdk.Stack {
       entry: 'lib/functions/fast_api',
       runtime: aws_lambda.Runtime.PYTHON_3_12,
       handler: 'index.handler',
+      bundling: {
+        // translates to `rsync --exclude='.venv'`
+        assetExcludes: ['.venv'],
+      },
     });
 
     const api = new aws_apigateway.LambdaRestApi(this, 'myapi', {
@@ -21,7 +25,7 @@ export class FastApiCdkDeployStack extends cdk.Stack {
         allowOrigins: aws_apigateway.Cors.ALL_ORIGINS,
         allowMethods: aws_apigateway.Cors.ALL_METHODS
       },
-      binaryMediaTypes: ['*/*']
+      binaryMediaTypes: ['*/*'],
     });
 
 
