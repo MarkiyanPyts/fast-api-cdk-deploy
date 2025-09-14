@@ -11,8 +11,7 @@ export class FastApiCdkDeployStack extends cdk.Stack {
     const fastApiLambda = new pythonLambda.PythonFunction(this, 'FastApiFunction', {
       entry: 'lib/functions/fast_api',
       runtime: aws_lambda.Runtime.PYTHON_3_12,
-      handler: 'index.handler',  // Just the filename and handler function
-      index: 'index.py',  // Explicitly specify the index file
+      handler: 'handler',  // Just the filename and handler function
       bundling: {
         // translates to `rsync --exclude='.venv'`
         assetExcludes: ['.venv'],
@@ -22,16 +21,5 @@ export class FastApiCdkDeployStack extends cdk.Stack {
     const api = new aws_apigateway.LambdaRestApi(this, 'myapi', {
       handler: fastApiLambda,
     });
-
-    // allow fastApi via Mungum
-
-
-
-    // The code that defines your stack goes here
-
-    // example resource
-    // const queue = new sqs.Queue(this, 'FastApiCdkDeployQueue', {
-    //   visibilityTimeout: cdk.Duration.seconds(300)
-    // });
   }
 }
