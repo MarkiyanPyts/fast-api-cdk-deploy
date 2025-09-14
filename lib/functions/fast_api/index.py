@@ -1,4 +1,3 @@
-from fastapi import FastAPI
 from mangum import Mangum
 
 from fastapi import FastAPI, HTTPException
@@ -6,7 +5,7 @@ from typing import Optional, List
 from enum import IntEnum
 from pydantic import BaseModel, Field
 
-api = FastAPI()
+api = FastAPI(openapi_prefix='/prod/')
 
 class Priority(IntEnum):
     LOW = 1
