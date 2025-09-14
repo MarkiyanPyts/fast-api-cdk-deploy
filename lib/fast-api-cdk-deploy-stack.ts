@@ -1,6 +1,6 @@
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-import pythonLambda from '@aws-cdk/aws-lambda-python-alpha';
+import * as pythonLambda from '@aws-cdk/aws-lambda-python-alpha';
 import { aws_lambda, aws_apigateway } from 'aws-cdk-lib';
 // import * as sqs from 'aws-cdk-lib/aws-sqs';
 
@@ -9,9 +9,9 @@ export class FastApiCdkDeployStack extends cdk.Stack {
     super(scope, id, props);
 
     const fastApiLambda = new pythonLambda.PythonFunction(this, 'FastApiFunction', {
-      entry: 'lib/functions',
+      entry: 'lib/functions/fast_api',
       runtime: aws_lambda.Runtime.PYTHON_3_13,
-      handler: 'fast_api.handler',
+      handler: 'index.handler',
     });
 
     const api = new aws_apigateway.LambdaRestApi(this, 'myapi', {
