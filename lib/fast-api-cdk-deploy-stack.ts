@@ -11,7 +11,8 @@ export class FastApiCdkDeployStack extends cdk.Stack {
     const fastApiLambda = new pythonLambda.PythonFunction(this, 'FastApiFunction', {
       entry: 'lib/functions/fast_api',
       runtime: aws_lambda.Runtime.PYTHON_3_12,
-      handler: 'index.handler',
+      handler: 'index.handler',  // Just the filename and handler function
+      index: 'index.py',  // Explicitly specify the index file
       bundling: {
         // translates to `rsync --exclude='.venv'`
         assetExcludes: ['.venv'],
