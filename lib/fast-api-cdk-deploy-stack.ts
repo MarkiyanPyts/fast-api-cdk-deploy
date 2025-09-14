@@ -16,7 +16,14 @@ export class FastApiCdkDeployStack extends cdk.Stack {
 
     const api = new aws_apigateway.LambdaRestApi(this, 'myapi', {
       handler: fastApiLambda,
+      proxy: true,
+      defaultCorsPreflightOptions: {
+        allowOrigins: aws_apigateway.Cors.ALL_ORIGINS,
+        allowMethods: aws_apigateway.Cors.ALL_METHODS
+      },
+      binaryMediaTypes: ['*/*']
     });
+
 
 
     // The code that defines your stack goes here
