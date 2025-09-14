@@ -10,7 +10,7 @@ export class FastApiCdkDeployStack extends cdk.Stack {
 
     const fastApiLambda = new pythonLambda.PythonFunction(this, 'FastApiFunction', {
       entry: 'lib/functions/fast_api',
-      runtime: aws_lambda.Runtime.PYTHON_3_13,
+      runtime: aws_lambda.Runtime.PYTHON_3_12,
       handler: 'index.handler',
     });
 
